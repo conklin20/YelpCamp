@@ -20,7 +20,8 @@ var indexRoutes         = require("./routes/index");
 // Database Config
 // **********************
 var dbVersion = "_v11";
-mongoose.connect("mongodb://localhost/yelp_camp" + dbVersion); 
+// mongoose.connect("mongodb://localhost/yelp_camp" + dbVersion); 
+mongoose.connect("mongodb://caryc:vikings@ds219318.mlab.com:19318/yelpcamp");
 
 // Needs to come before passport config
 app.use(flash()); //used for our flash messages... this lib is pretty old so hold on
