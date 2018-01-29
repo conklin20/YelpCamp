@@ -6,6 +6,19 @@
     padding: 0; 
 }
 
+.thumbnail .caption-full {
+    padding: 9px;
+}
+
 .delete-from {
     display: inline;
+}
+
+.flexwrap {
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+#moreinfo {
+    margin-bottom: 9px; 
 }

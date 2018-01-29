@@ -18,10 +18,14 @@ var indexRoutes         = require("./routes/index");
 
 // **********************
 // Database Config
+// Using environment variables here to distinguish between our test (C9) db version, and our "prod" or "deployed" (heroku) db version 
+// In order to do so, we need to run the following commands to CREATE an environment variable in both enviornments 
+// 1) For Cloud9, run cmd: export DATABASEURL=mongodb://localhost/yelp_camp
+// 2) For Heroku, run cmd: heroku config:set DATABASEURL=mongodb://<username>:<password>@ds219318.mlab.com:19318/yelpcamp
+//      OR: you can go to your Heroku account, and under settings of your app find "config vars" and manually add key: DATABASEURL value:  { heroku url string }
+//      URL for this Heroku db: mongodb://<username>:<password>@ds219318.mlab.com:19318/yelpcamp
 // **********************
-var dbVersion = "_v11";
-// mongoose.connect("mongodb://localhost/yelp_camp" + dbVersion); 
-mongoose.connect("mongodb://caryc:vikings@ds219318.mlab.com:19318/yelpcamp");
+mongoose.connect(process.env.DATABASEURL); 
 
 // Needs to come before passport config
 app.use(flash()); //used for our flash messages... this lib is pretty old so hold on
