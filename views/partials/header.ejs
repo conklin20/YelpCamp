@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YelpCamp</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    	  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    	  <!--//using semantic of the icons-->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css"> 
+    	  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    </head>
+    <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">-->
+          <!--  <span class="sr-only">Toggle navigation</span>-->
+          <!--  <span class="icon-bar"></span>-->
+          <!--  <span class="icon-bar"></span>-->
+          <!--  <span class="icon-bar"></span>-->
+          <!--</button>-->
+          <a class="navbar-brand" href="/">YelpCamp</a>
+        </div>
+    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <!--check if user is logged in-->
+            <% if(!currentUser){ %>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Sign Up</a></li>
+            <% } else { %>
+              <li><a href="#">Logged in as: <%= currentUser.username %></a></li>
+              <li><a href="/logout">Logout</a></li>
+            <% } %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+    <!--Flash message-->
+    <div class="container">
+      <% if(error && error.length > 0){ %>
+        <div class="alert alert-danger" role="alert">
+          <h1><%= error %></h1>
+        </div>
+      <% } %>
+      <% if(success && success.length > 0){ %>
+        <div class="alert alert-success" role="alert">
+          <h1><%= success %></h1>
+        </div>
+      <% } %>
+    </div>
