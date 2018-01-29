@@ -14,7 +14,7 @@ router.get("/", function(req, res){
 // AUTH ROUTES
 // INDEX ROUTE
 router.get("/register", function(req, res){
-    res.render("users/register"); 
+    res.render("users/register", {page: 'register'}); 
 }); 
 
 // CREATE ROUTE
@@ -34,7 +34,7 @@ router.post("/register", function(req, res){
 
 // Show Login Form 
 router.get("/login", function(req, res){
-    res.render("users/login"); 
+    res.render("users/login", {page: 'login'}); 
 }); 
 
 // Use middleware as the 2nd arg (object) to log user in
