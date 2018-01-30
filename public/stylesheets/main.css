@@ -19,6 +19,19 @@
     flex-wrap: wrap;
 }
 
+.avatar {
+    margin: .5em auto; 
+    border-radius: 50%; 
+}
+.avatar.sm {
+    height: 2.5em;
+    width: 2.5em;
+}
+.avatar.lg {
+    height: 10em;
+    width: 10em;
+}
+
 #moreinfo {
     margin-bottom: 9px; 
 }
@@ -28,3 +41,4 @@
     height: 400px;
     width: 100%;
 }
+

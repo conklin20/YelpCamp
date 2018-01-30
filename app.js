@@ -29,6 +29,7 @@ mongoose.connect(process.env.DATABASEURL);
 
 // Needs to come before passport config
 app.use(flash()); //used for our flash messages... this lib is pretty old so hold on
+app.locals.moment = require('moment'); //MomentJS
 
 // **********************
 // Passport Config
@@ -49,9 +50,9 @@ passport.deserializeUser(User.deserializeUser());
 // **********************
 // pass our currentUser object to all routes 
 app.use(function(req, res, next){
-   res.locals.currentUser = req.user; 
-   res.locals.error = req.flash("error"); 
-   res.locals.success = req.flash("success"); 
+   res.locals.currentUser   = req.user; 
+   res.locals.error         = req.flash("error"); 
+   res.locals.success       = req.flash("success"); 
    next(); 
 });
 

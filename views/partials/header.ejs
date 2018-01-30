@@ -31,7 +31,10 @@
                       <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
                       <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
                   <% } else { %>
-                      <li><a href="#">Logged In As: <%= currentUser.username %></a></li>
+                      <% if(currentUser.avatar) { %>
+                        <li><img class="avatar sm" src="<%= currentUser.avatar %>"></li>
+                      <% } %>
+                      <li><a href="/users/<%= currentUser._id %>">Logged In As: <%- (currentUser && currentUser.isAdmin) ? currentUser.username + " <strong>(Admin)</strong>" : currentUser.username  %></a></li>
                       <li><a href="/logout">Logout</a></li>
                   <% } %>
               </ul>
