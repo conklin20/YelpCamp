@@ -66,19 +66,15 @@
     <!--Detail on how to whitelist our app url: http://slides.com/nax3t/yelpcamp-refactor-google-maps#/10-->
     <script>
           function initMap() {
-            var lat = <%= campground.lat %>;
-            var lng = <%= campground.lng %>;
+            var lat = <%= campground.location.lat %>;
+            var lng = <%= campground.location.lng %>;
             var center = {lat: lat, lng: lng };
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 8,
                 center: center,
                 scrollwheel: false
             });
-            var contentString = `
-              <strong><%= campground.name %><br />
-              <%= campground.location %></strong>
-              <p><%= campground.description %></p>
-            `
+            var contentString = "<strong><%= campground.name %><br /><%= campground.location.address %></strong><p><%= campground.description %></p>"
             var infowindow = new google.maps.InfoWindow({
               content: contentString
             });

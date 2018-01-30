@@ -9,7 +9,7 @@ var campgroundSchema = new mongoose.Schema({
    location: {
       address: String, 
       lat: Number, 
-      long: Number
+      lng: Number
    },
    author: {
       id: {
