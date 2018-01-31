@@ -77,7 +77,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         upload(req, res, function(err){
             if(err) {
                 req.flash('error', err.message);
-                return res.end("Error uploading file.");
+                return res.end("Error uploading file. Error: " + err.message);
             }
             
             //build out the images array 
