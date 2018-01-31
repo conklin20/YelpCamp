@@ -39,15 +39,32 @@ var upload = multer({ storage: storage, fileFilter: imageFilter}).any('image', 5
 
 //INDEX ROUTE - show all campgrounds
 router.get("/", function(req, res){ 
-    //get all campgrounds from db 
-    Campground.find({}, function(err, allCampgrounds){
-        if(err){
-            console.log(err); 
-        } else {
-            //then render the file
-            res.render("campgrounds/index", {campgrounds: allCampgrounds, page: 'campgrounds'}); 
-        }
-    }); 
+    //if they 
+    var noMatch;
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi'); 
+        
+        Campground.find({name: regex}, function(err, allCampgrounds){
+            if(err){
+                console.log(err); 
+            } else {
+                if(allCampgrounds.length < 1) {
+                    noMatch = "No campgrounds match that query, please try again."; 
+                }
+                res.render("campgrounds/index", {campgrounds: allCampgrounds, page: 'campgrounds', noMatch: noMatch}); 
+            }
+        }); 
+    } else {
+        //get all campgrounds from db 
+        Campground.find({}, function(err, allCampgrounds){
+            if(err){
+                console.log(err); 
+            } else {
+                //then render the file
+                res.render("campgrounds/index", {campgrounds: allCampgrounds, page: 'campgrounds', noMatch: noMatch}); 
+            }
+        }); 
+    }
 }); 
 
 //CREATE ROUTE - add new campground to db
@@ -205,6 +222,10 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
         }
     }); 
 });
+
+function escapeRegex(text){
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"); 
+};
 
 
 module.exports = router; 
