@@ -4,33 +4,57 @@
         <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2"></div>
         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8 text-center">
             <h1 style="text-align: center;">Create a New Campground</h1>
-            <form action="/campgrounds" method="POST">
+                                                      <!-- \/ Allows for upload feature using Cloudinary-->
+            <form id="newCampground" action="/campgrounds" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="pull-left" for="name">Name</label>
-                    <input class="form-control" type="text" name="name" placeholder="name">
+                    <input class="form-control" type="text" name="name" placeholder="name" required>
                 </div>
                 <div class="form-group">
-                    <label class="pull-left" for="image">Image</label>
-                    <input class="form-control" type="text" name="image" placeholder="image url">
+                    <label class="pull-left" for="images">Image(s)</label>
+                    <input class="" type="file" name="images" multiple="multiple">
+                    <!--<input class="form-control" id="image" type="file" name="image" accept="image/*" required>-->
                 </div>
                 <div class="form-group">
                     <label class="pull-left" for="description">Description</label>
-                    <input class="form-control" type="text" name="description" placeholder="description">
+                    <input class="form-control" type="text" name="description" placeholder="description" required>
                 </div>
                 <div class="form-group">
                     <label class="pull-left" for="price">Price</label>
-                    <input class="form-control" type="number" name="price" placeholder="price" min="0.00" step="0.01">
+                    <input class="form-control" type="number" name="price" placeholder="price" min="0.00" step="0.01" required>
                 </div>
                 <div class="form-group">
                     <label class="pull-left" for="location">Location</label>
-                    <input class="form-control" type="text" name="location" id="location" placeholder="Yosemite National Park, CA">
+                    <input class="form-control" type="text" name="location" id="location" placeholder="Yosemite National Park, CA" required>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+                <div class="form-group">
+                    <span id="status"></span>
                 </div>
             </form>
             <a href="/campgrounds">Go Back</a>
         </div>
     </div>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#newCampground').submit(function() {
+                $("#status").empty().text("File is uploading...");
+                $(this).ajaxSubmit({
+                    error: function(xhr) {
+                  status('Error: ' + xhr.status);
+                    },
+                    success: function(response) {
+                console.log(response)
+                    $("#status").empty().text(response);
+                    }
+                });
+            return false;
+            });    
+        });
+    </script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 <% include ../partials/footer %>

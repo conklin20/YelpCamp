@@ -14,7 +14,13 @@
         </div>
         <div class="col-md-9">
             <div class="thumbnail">
-                <img class="image-responsive" src=" <%= campground.image %> ">
+                <% if (campground.images && campground.images.length > 0) { %>
+                    <% for(var i = 0; i < campground.images.length; i++ ) { %>
+                        <img class="img-responsive" src="<%= "/uploads/" + campground.images[i] %>">
+                    <% } %>
+                <% } else { %>
+                    <img class="image-responsive" src="https://cdn.shopify.com/s/files/1/0095/4332/t/30/assets/no-image.svg?8963721412591809589">
+                <% } %>
                 <div class="caption">
                     <% if(campground.price == 0.00){ %>
                         <h4 class="pull-right">Free!</h4>
@@ -70,7 +76,7 @@
     <!--AIzaSyCLm8uxycBu_oAUYA0oLhJgskKEwBj7o0U -->
     <!--Detail on how to whitelist our app url: http://slides.com/nax3t/yelpcamp-refactor-google-maps#/10-->
     <script>
-          function initMap() {
+        function initMap() {
             var lat = <%= campground.location.lat %>;
             var lng = <%= campground.location.lng %>;
             var center = {lat: lat, lng: lng };
@@ -90,7 +96,7 @@
             marker.addListener('click', function() {
               infowindow.open(map, marker);
             });
-          }
+        }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLm8uxycBu_oAUYA0oLhJgskKEwBj7o0U&callback=initMap"></script>
     
